@@ -1,0 +1,24 @@
+<div class="row">
+    {{#each productos}}
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title d-flex justify-content-between align-items-center">
+                   <b> Productos <a href="/productos/edit/{{_id}}"><i class="fas fa-pencil-alt"></i></a> </b>
+                </h3>
+                <p>Id Producto: {{idProducto}}</p>
+                <p>Nombre: {{nombre}}</p>
+                <p>Descripcion {{descripcion}}</p> 
+                <p>Cantidad {{cantidad}}</p>
+ 
+                <form action="/producto/delete/{{_id}}?_method=DELETE" method="POST">
+                    <input type="hidden" name="_method" value = "DELETE">
+                        <button type="submit" class="btn btn-danger btn-block btn-sm">
+                            Eliminar
+                        </button>
+                </form> 
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
