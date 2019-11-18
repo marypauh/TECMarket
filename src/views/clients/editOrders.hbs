@@ -1,0 +1,43 @@
+<div class="col-md-4 mx-auto">
+    <div class="card">
+        <div class="card-header">
+            <h3>Edit Order</h3>
+        </div>
+        <div class="card-body">
+            <form action="/orders/edit-order/{{order._id}}?_method=PUT" method="POST">
+                 <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+                    <input type="text" name="IdOrder" class= "form-control" placeholder="Id Order"
+                    value = "{{order.idOrder}}"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="IdProduct" class= "form-control" placeholder="Id Product" value = "{{order.idProduct}}"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Quantity" class= "form-control" placeholder="Quantity" value = "{{order.quantity}}"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Price" class= "form-control" placeholder="Price" value = "{{order.price}}"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="DateO" class= "form-control" placeholder="Date" value = "{{order.dateO}}"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Hour" class= "form-control" placeholder="Hour" value = "{{order.hour}}"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="State" class= "form-control" placeholder="State" value = "{{order.state}}"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Needs" class= "form-control" placeholder="Needs" value = "{{order.needs}}"/>
+                </div>
+                
+                <div class="form-group">
+                    <button class= "btn btn-primary btn-block" type="submit">
+                        Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

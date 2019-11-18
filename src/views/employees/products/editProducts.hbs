@@ -1,0 +1,31 @@
+<div class="col-md-4 mx-auto">
+    <div class="card">
+        <div class="card-header">
+            <h3>Edit Products</h3>
+        </div>
+        <div class="card-body">
+            <form action="/products/edit-product/{{product._id}}?_method=PUT" method="POST">
+                 <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+                    <input type="text" name="IdProduct" class= "form-control" placeholder="Id Product"
+                    value = "{{product.idProduct}}"/>
+                </div>
+                <div class="form-group">
+                        <input type="text" name="Name" class= "form-control" placeholder="Name"
+                        value = "{{product.name}}"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Description" class= "form-control" placeholder="Description" value = "{{product.description}}"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Quantity" class= "form-control" placeholder="Quantity" value = "{{product.quantity}}"/>
+               
+                <div class="form-group">
+                    <button class= "btn btn-primary btn-block" type="submit">
+                        Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

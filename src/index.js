@@ -42,9 +42,9 @@ app.use(passport.session());
 
 //Rutas
 app.use(require('./routes/index'));
-app.use(require('./routes/usuarios'));
-app.use(require('./routes/empleados'));
-app.use(require('./routes/clientes'));
+app.use(require('./routes/users'));
+app.use(require('./routes/employees'));
+app.use(require('./routes/clients'));
 app.use(require('./routes/'));
 
 //Archivos Estáticos

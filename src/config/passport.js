@@ -3,15 +3,15 @@ const LocalStrategy= require('passport-local').Strategy;
 const bcrypt = require("bcryptjs");
 
 
-const Usuario = require('../models/usuarios');
+const User = require('../models/users');
 const mongoose = require('mongoose');
 
 
 passport.use(new LocalStrategy({
 
-    usernameField: 'usuario'
-}, async(usuario, password,done) => {
-    const user = await Usuario.findOne({usuario: usuario});
+    usernameField: 'username'
+}, async(username, password,done) => {
+    const user = await User.findOne({user: username});
     if(!user) {
         return done(null, false, {message: 'Usuario no encontrado'})
     } else{

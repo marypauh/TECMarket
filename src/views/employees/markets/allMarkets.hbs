@@ -1,18 +1,18 @@
 <div class="row">
-    {{#each super}}
+    {{#each markets}}
     <div class="col-md-3">
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title d-flex justify-content-between align-items-center">
-                   <b> Supermercados <a href="/super/edit/{{_id}}"><i class="fas fa-pencil-alt"></i></a> </b>
+                   <b> Markets <a href="/markets/edit/{{_id}}"><i class="fas fa-pencil-alt"></i></a> </b>
                 </h3>
-                <p>Latitud {{latitud}}</p>
-                <p>Longitud: {{longitud}}</p>
-                <p>Direccion: {{direccion}}</p> 
-                <form action="/super/delete/{{_id}}?_method=DELETE" method="POST">
+                <p>Latitude: {{latitude}}</p>
+                <p>Length: {{length}}</p>
+                <p>Direction: {{direction}}</p> 
+                <form action="/market/delete/{{_id}}?_method=DELETE" method="POST">
                     <input type="hidden" name="_method" value = "DELETE">
                         <button type="submit" class="btn btn-danger btn-block btn-sm">
-                            Eliminar
+                            Delete
                         </button>
                 </form> 
             </div>
