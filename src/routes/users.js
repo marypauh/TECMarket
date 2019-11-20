@@ -12,13 +12,13 @@ router.get('/login',(req, res) => {
 router.get('/register',(req, res) => {
   res.render('signup');
 });
- 
+
 
 router.post('/register/new', async (req, res) => {
   let errors = [];
-  const { id, name, email, telephone, dateU, type, user, password} = req.body;
+  const {  name, email, telephone, dateU, type, user, password} = req.body;
   if(errors.length > 0){
-    res.render('signup', {errors, id, name, email, telephone, dateU, type, user, password});
+    res.render('signup', {errors, name, email, telephone, dateU, type, user, password});
   } else {
     // Look for username coincidence
     const nameU = await User.findOne({user: user});
@@ -36,10 +36,10 @@ router.post('/register/new', async (req, res) => {
 });
 
   router.post('/login/new',passport.authenticate('local'),async (req, res) => { 
-      
-    const {user} = req.body;
+    const {username} = req.body;
         const {password} = req.body;
-    const username = await Usuario.findOne({user:user});
+    const user = await User.findOne({username:username});
+   console.log(user);
     const typeU = user.type
     if (typeU == 1) {
       console.log("Employee");

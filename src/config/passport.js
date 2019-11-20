@@ -11,7 +11,7 @@ passport.use(new LocalStrategy({
 
     usernameField: 'username'
 }, async(username, password,done) => {
-    const user = await User.findOne({user: username});
+    const user = await User.findOne({username: username});
     if(!user) {
         return done(null, false, {message: 'Usuario no encontrado'})
     } else{
@@ -30,7 +30,7 @@ passport.serializeUser((user,done) => {
 });
 
 passport.deserializeUser((id,done) => {
-    Usuario.findById(id,(err,user) => {
+    User.findById(id,(err,user) => {
         done(err,user);
 });
 });
