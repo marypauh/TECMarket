@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const passport = require('passport');
+const Migration = require('../config/migration'); 
 
 const User = require('../models/users');
 
@@ -42,12 +43,14 @@ router.post('/register/new', async (req, res) => {
    console.log(user);
     const typeU = user.type
     if (typeU == 1) {
+      Migration();
       console.log("Employee");
       res.redirect('/markets/create');
     }
   
     if (typeU == 2) {
       console.log("Client");
+      Migration();
      res.redirect('/orders/create');
     
     } 

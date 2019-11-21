@@ -5,6 +5,8 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 var bodyParser = require('body-parser')
 const passport = require('passport');
+//const Migration = require('.../config/migration'); 
+
 
 
 //Inicializaciones 
@@ -56,4 +58,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Inicio de Servidor
 app.listen(app.get('port'), () =>{
     console.log('Server on port', app.get('port'));
+    //Migration();
 });
