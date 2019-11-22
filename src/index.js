@@ -8,7 +8,6 @@ const passport = require('passport');
 //const Migration = require('.../config/migration'); 
 
 
-
 //Inicializaciones 
 const app = express();
 const DB = require('./database');
