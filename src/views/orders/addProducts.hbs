@@ -1,0 +1,27 @@
+<div class="col-md-4 mx-auto">
+  <div class="card text-center">
+    <div class="card-header">
+      <h3>Add Products </h3>
+       <a href="/orders/addP/{{newOrder.idOrder}}"><i class="fas fa-shopping-cart"></i></a>
+    </div>
+    <div class="card-body">
+      <form action="/markets/allMarkets" method="POST">
+      <div class="form-group">
+          <input type="Number" name="idOrd" class="form-control" placeholder="idOrd" value = "{{newOrder.idOrder}}"/>
+        </div>
+              <div class="form-group">
+          <input type="Number" name="IdProduct" class="form-control" placeholder="ID Product"/>
+        </div>
+        <div class = "form-group">
+            <input type = "Number" name ="quantity" class= "form-control" placeholder="Quantity" autofocus/>
+        </div>
+          <button class="btn btn-primary btn-block" type="submit">
+            Ready
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<br>

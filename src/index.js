@@ -8,6 +8,7 @@ const passport = require('passport');
 //const Migration = require('.../config/migration'); 
 
 
+
 //Inicializaciones 
 const app = express();
 const DB = require('./database');
@@ -57,5 +58,4 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Inicio de Servidor
 app.listen(app.get('port'), () =>{
     console.log('Server on port', app.get('port'));
-    //Migration();
 });

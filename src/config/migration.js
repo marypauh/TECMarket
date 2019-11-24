@@ -83,7 +83,7 @@ module.exports = async()=>{
         const quantityP = product.quantity;
 
         session
-        .run('CREATE (n:Prodcuts {idProduct: {idP}, name: {namePr},description:{desP},quantity:{quantP}}) Return n',
+        .run('CREATE (n:Products {idProduct: {idP}, name: {namePr},description:{desP},quantity:{quantP}}) Return n',
         {idP :idPr, namePr :nameP,desP:descriptionP,quantP:quantityP})
         .then(function(result){
             session.close();

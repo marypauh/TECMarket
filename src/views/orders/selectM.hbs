@@ -1,0 +1,16 @@
+<div class="row">
+    {{#each markets}}
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title d-flex justify-content-between align-items-center">
+                   <b> {{name}}<a href="/orderDetail/{{_id}}"><i class="fas fa-shopping-cart"></i></a> </b>
+                </h3>
+                <p>Latitude: {{latitude}}</p>
+                <p>Length: {{length}}</p>
+                <p>Direction: {{direction}}</p> 
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
