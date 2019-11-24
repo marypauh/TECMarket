@@ -45,13 +45,13 @@ router.post('/register/new', async (req, res) => {
     if (typeU == 1) {
       Migration();
       console.log("Employee");
-      res.redirect('/markets/create');
+      res.redirect('/employeeM');
     }
   
     if (typeU == 2) {
       console.log("Client");
       Migration();
-     res.redirect('/orders/create');
+     res.redirect('/clientM');
     
     } 
   });  

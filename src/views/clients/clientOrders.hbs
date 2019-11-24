@@ -1,0 +1,25 @@
+
+<div class="row">
+    {{#each clientO}}
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title d-flex justify-content-between align-items-center">
+                    <b>Orders </b>
+                </h3>
+                <p>idOrder: {{idOrder}}</p>
+                <p>Market: {{market}}</p> 
+                <p>Client: {{clientUsername}}</p>
+                <p>Products: {{products}}</p>
+                <p>Products Quantity:  {{quantityProducts}}</p>
+                <p>Total: {{total}}</p>
+                <p>Order Date {{dateO}}</p>
+                <p>Hour {{hour}}</p>
+                <p>State {{state}}</p>
+                <p>Needs {{needs}}</p>
+                
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>

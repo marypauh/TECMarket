@@ -8,6 +8,15 @@ const Products = require('../models/products');
 
 var idOrderGlobal = 0;
 
+router.get('/clientM', (req,res) =>{
+  res.render('clientM');
+});
+
+router.get('/consultOrders', (req,res) =>{
+  res.render('clients/consultOrders');
+});
+
+
 
 router.post('/orders/new',async (req, res) => {
   const {Market} = req.body;
@@ -30,7 +39,7 @@ router.post('/orders/new',async (req, res) => {
   idOrderGlobal = idOrd
   const products = await Products.find();
   //await newOrder.save();
-  res.render('/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/orders/addProducts', {products});
+  res.render('orders/addProducts', {products});
 });
 
 
@@ -118,5 +127,13 @@ router.get('/orders/addP',async (req, res) => {
   //await Product.save();
  //res.render('orders/addProducts',{newOrder});
 });
+
+router.post('/clients/orders' , async (req, res) => {
+  const {clientUsername} = req.body;
+  const clientO = await Order.find({clientUsername:clientUsername});
+  res.render('clients/clientOrders', {clientO});
+});
+
+
 
 module.exports = router;

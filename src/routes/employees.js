@@ -6,6 +6,11 @@ const MongoClient = require('mongodb').MongoClient;
 const Product = require('../models/products');
 const Market =  require('../models/markets');
 
+router.get('/employeeM', (req,res) =>{
+  res.render('employeeM');
+});
+
+
 router.post('/products/new',async (req, res) => {
   const newProduct = new Product(req.body);
   await newProduct.save();
