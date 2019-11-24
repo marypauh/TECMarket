@@ -10,13 +10,13 @@
           <input type="text" name="name" class="form-control" placeholder="Name" autofocus/>
         </div>
          <div class="form-group">
-          <input type="text" name="description" class="form-control" placeholder="Description" autofocus/>
+          <input type="text" name="description" class="form-control" placeholder="Description"autofocus/>
         </div>
         <div class="form-group">
-          <input type="text" size="140" name="latitude" class="form-control" placeholder="Latitude" autofocus/>
+          <input type="text" size="140" name="latitude" class="form-control" placeholder="Latitude" id="lat" autofocus/>
         </div>
         <div class="form-group">
-          <input type = "text" name = "length" class="form-control" placeholder="Length" autofocus/>
+          <input type = "text" name = "length" class="form-control" placeholder="Longitude" id="long"autofocus/>
         </div>
         <div class="form-group">
           <input type ="text" name= "direction"class="form-control index-search" placeholder="Direction" id="search_term" autofocus/>
@@ -26,6 +26,13 @@
           <button class="btn btn-primary btn-block" type="submit">
             Create
           </button>
+          <div class="form-group">
+          <button class="btn btn-primary" onclick="searchAdress()" type="button">
+            Search Adress
+          </button>
+        <button class="btn btn-primary" onclick="searchCoordinates()" type="button">
+            Search Coordinates
+          </button>
         </div>
       </form>
     </div>
@@ -33,3 +40,25 @@
 </div>
 <br>
 <br>
+<Script>
+  function searchAdress(){
+    var lat = document.getElementById('lat').value;
+    var long = document.getElementById('long').value;
+    var adress = new google.maps.LatLng(lat,long);
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'location': adress}, function(results, status) {
+        document.getElementById("search_term").value = (results[0].formatted_address);
+    });
+    }
+
+    function searchCoordinates(){
+    var adress = document.getElementById("search_term").value;
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': adress}, function(results, status) {
+    document.getElementById('lat').value = results[0].geometry.location.lat();;
+    document.getElementById('long').value = results[0].geometry.location.lng();
+    });
+    }
+</Script>
+
+
