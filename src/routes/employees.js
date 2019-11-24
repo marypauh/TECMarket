@@ -9,7 +9,7 @@ const Market =  require('../models/markets');
 router.post('/products/new',async (req, res) => {
   const newProduct = new Product(req.body);
   await newProduct.save();
-  res.redirect('/products/all');
+  res.redirect('/products/create');
 });
 
 
@@ -33,12 +33,16 @@ router.put('/products/edit-product/:id', async (req, res) => {
  const {Name} = req.body;
  const {Description} = req.body;
  const {Quantity} = req.body;
+ const {Price} = req.body;
+ const {NameMarket} = req.body;
 
  const product = await Product.findById(req.params.id);
   product.idProduct = IdProduct;
   product.name =  Name;
   product.description = Description;
   product.quantity = Quantity;
+  product.price = Price;
+  product.nameMarket = NameMarket;
 
  await product.save();
  res.redirect('/products/all')
@@ -56,7 +60,7 @@ router.delete('/product/delete/:id', async (req,res) =>{
 router.post('/markets/new',async (req, res) => {
   const newMarket = new Market(req.body);
   await newMarket.save();
-  res.redirect('/markets/all');
+  res.redirect('/products/create');
 });
 
 
