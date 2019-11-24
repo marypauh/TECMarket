@@ -6,6 +6,8 @@ const Order = require('../models/orders');
 const Markets = require('../models/markets');
 const Products = require('../models/products');
 
+var idOrderGlobal = 0;
+
 
 router.post('/orders/new',async (req, res) => {
   const {Market} = req.body;
@@ -25,9 +27,10 @@ router.post('/orders/new',async (req, res) => {
   newOrder.state = state;
   newOrder.needs = needs;
   
+  idOrderGlobal = idOrd
   const products = await Products.find();
-  await newOrder.save();
-  res.render('/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/orders/addProducts', {products,newOrder});
+  //await newOrder.save();
+  res.render('/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/orders/addProducts', {products});
 });
 
 
@@ -87,9 +90,9 @@ router.get('/orderDetail/:id',async (req, res) => {
  res.render('orders/orderDetail',{market});
 });
 
-router.get('/orders/addP/:id',async (req, res) => {
-  const order = await Order.findById(req.params.id);
-  console.log(order.idOrder);
+router.get('/orders/addP',async (req, res) => {
+  //const order = await Order.findById(req.params.id);
+  console.log(idOrderGlobal);
   //const {idOrd} = req.body;
   //const IdProduct = 123;
   //const quantity = 2;

@@ -117,6 +117,56 @@ module.exports = async()=>{
         })
 
     };
+    /*const orderMongo = await Orders.find();
+    for(var i = 0; i < orderMongo.length; i++){
+        const order = orderMongo[i];
+        console.log(order);
+        const idOrd = order.idOrder;
+        const totalO = order.total;
+        const hourO = order.hour;
+        const stateO = order.state;
+        const needsO = order.needs;
+
+        const client = order.clientUsername;
+        const nameMark = order.name;
+        console.log(idOrd); 
+        console.log(hourO); 
+
+       /* market: {type: String , required:true},
+    clientUsername: {type: String , required: true},
+    products: {type: Array , required: false, default: []},
+    quantityProducts : {type: Array, required: false, default: []},
+    total: {type: Number, required: true, default: 0},
+    dateO: {type: Date, required: true},
+    hour: {type: String, required:true},
+    state: {type: String, required: true},
+    needs: {type: String, required: false},*/
+
+        /*session
+        .run('CREATE (n:Orders {idOrder: {idO}, total:{tO}, hour:{hourOr}, state:{sO},needs:{nO}}) Return n',
+        { idO: idOrd, tO:totalO, hourOr:hourO, sO: stateO, nO: needsO})
+        .then(function(result){
+            session.close();
+            console.log("orden");                
+        })
+        .catch(function(err){
+            console.log("errorJ");
+            console.log(err);
+        })
+
+       /* session
+        .run('MATCH (a:Orders), (b:Clients) WHERE a.idOrder = {idO} AND b.name = {clientN} CREATE (b)-[r: MADE_AN_ORDER]->(a)  RETURN a,b ',{idO:idOrd,clientN:client})
+        .then(function(result){
+            session.close();
+            console.log("cliente");                
+        })
+        .catch(function(err){
+            console.log("errorA");
+            console.log(err);
+        })*/
+
+
+        
 
 
  };
