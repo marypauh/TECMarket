@@ -24,9 +24,10 @@ router.post('/orders/new',async (req, res) => {
   newOrder.hour = hour;
   newOrder.state = state;
   newOrder.needs = needs;
-
+  
+  const products = await Products.find();
   await newOrder.save();
- res.render('orders/addProducts',{newOrder});
+  res.render('/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/orders/addProducts', {products,newOrder});
 });
 
 

@@ -1,27 +1,34 @@
-<div class="col-md-4 mx-auto">
-  <div class="card text-center">
-    <div class="card-header">
-      <h3>Add Products </h3>
-       <a href="/orders/addP/{{newOrder._id}}"><i class="fas fa-shopping-cart"></i></a>
+<div class="row">
+    {{#each products}}
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title d-flex justify-content-between align-items-center">
+                   <b> Product </b>
+                </h3>
+                <p>Id Orden: {{newOrder.state}} </p>
+                <p>Id Product: {{idProduct}}</p>
+                <p>Name: {{name}}</p>
+                <p>Description: {{description}}</p> 
+               
+                <div class="form-group">
+                     <input type="Number" name="quant" class="form-control" placeholder="Quantity" autofocus/>
+                </div>
+ 
+                <form action="/product/delete/{{_id}}" method="POST">
+                    <input type="hidden" name="_method" value = "DELETE">
+                        <button type="submit" class="btn btn-danger btn-block btn-sm">
+                            Purchase 
+                        </button>
+                </form> 
+                 <form action="/product/delete/{{_id}}?_method=DELETE" method="POST">
+                    <input type="hidden" name="_method" value = "Holi">
+                        <button type="submit" class="btn btn-danger btn-block btn-sm">
+                            Ready
+                        </button>
+                </form> 
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-      <form action="/markets/allMarkets" method="POST">
-      <div class="form-group">
-          <input type="Number" name="idOrd" class="form-control" placeholder="idOrd" value="{{newOrder.idOrder}}"/>
-        </div>
-              <div class="form-group">
-          <input type="Number" name="IdProduct" class="form-control" placeholder="ID Product"/>
-        </div>
-        <div class = "form-group">
-            <input type = "Number" name ="quantity" class= "form-control" placeholder="Quantity" autofocus/>
-        </div>
-          <button class="btn btn-primary btn-block" type="submit">
-            Ready
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
+    {{/each}}
 </div>
-<br>
-<br>
