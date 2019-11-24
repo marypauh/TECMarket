@@ -26,7 +26,7 @@ router.post('/orders/new',async (req, res) => {
   newOrder.needs = needs;
 
   await newOrder.save();
- res.render('/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/orders/addProducts', {newOrder});
+ res.render('orders/addProducts',{newOrder});
 });
 
 
@@ -65,53 +65,54 @@ router.get('/orders/edit/:id', async (req,res) => {
     order.state = State;
     order.needs = Needs;
 
- //await order.save();
+ await order.save();
  res.redirect('/orders/all')
 });
 
 router.delete('/order/delete/:id', async (req,res) =>{
   await Order.findByIdAndDelete(req.params.id);
-  res.redirect('/orders/all')
+  res.redirect('orders/all')
 }); 
 
 router.get('/orders/selectMarket', async (req, res) => {
   const markets = await Markets.find();
   console.log(markets);
-  res.render('/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/orders/selectM', {markets});
+  res.render('orders/selectM', {markets});
 });
 
 router.get('/orderDetail/:id',async (req, res) => {
   //console.log(req.param.id);
   const market = await Markets.findById(req.params.id);
-  console.log(market)
- res.render('/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/orders/orderDetail',{market});
+ res.render('orders/orderDetail',{market});
 });
 
 router.get('/orders/addP/:id',async (req, res) => {
-  const {idOrd} = req.body;
-  const IdProduct = 123;
-  const quantity = 2;
+  const order = await Order.findById(req.params.id);
+  console.log(order.idOrder);
+  //const {idOrd} = req.body;
+  //const IdProduct = 123;
+  //const quantity = 2;
 
-  const newOrder = await Order.findOne({idOrder : idOrd});
-  const product = await Products.findOne({idProduct: IdProduct});
-  console.log(newOrder); 
-  console.log(idOrd);
-  console.log(product);
-  console.log(newOrder);
-  newOrder.products.push(IdProduct);
-  newOrder.quantityProducts.push(quantity);
-  const priceP = product.price;
-  const totalP = newOrder.total;
-  const totalOrder = totalP + (priceP * quantity);
-  newOrder.total = totalOrder;
-  product.quantity = product.quantity - quantity;
+  //const newOrder = await Order.findOne({idOrder : idOrd});
+  //const product = await Products.findOne({idProduct: IdProduct});
+  //console.log(newOrder); 
+  //console.log(idOrd);
+  //console.log(product);
+  //console.log(newOrder);
+  //newOrder.products.push(IdProduct);
+  //newOrder.quantityProducts.push(quantity);
+  //const priceP = product.price;
+  //const totalP = newOrder.total;
+  //const totalOrder = totalP + (priceP * quantity);
+  //newOrder.total = totalOrder;
+  //product.quantity = product.quantity - quantity;
 
-  console.log(product);
-  console.log(newOrder);
+  //console.log(product);
+  //console.log(newOrder);
 
   //await Order.save();
   //await Product.save();
- res.render('/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/orders/addProducts',{newOrder});
+ //res.render('orders/addProducts',{newOrder});
 });
 
 module.exports = router;
