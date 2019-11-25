@@ -50,7 +50,6 @@ router.post('/register/new', async (req, res) => {
   
     if (typeU == 2) {
       console.log("Client");
-      Migration();
      res.redirect('/clientM');
     
     } 

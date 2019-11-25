@@ -106,9 +106,16 @@ router.get('/consult2', (req,res)=>{
 })
 
 router.get('/consult5', (req,res)=>{
+    res.render("consults/get5");
+})
+
+router.post('/consults/consult5', (req,res)=>{
     var errors=[];
+    var marketsName = [];
+
+    //get the 
     session3
-    .run('MATCH (n:Products) RETURN n LIMIT 25')
+    .run('MATCH(b)-[:In]->(c) RETURN c')
     .then(function(result1){
         var products = [];
 
@@ -121,7 +128,7 @@ router.get('/consult5', (req,res)=>{
        
 
 
-       res.render("consults/viewConsult5", {products}); 
+       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult5", {products}); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})

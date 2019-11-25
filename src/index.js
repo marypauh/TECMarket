@@ -5,7 +5,7 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 var bodyParser = require('body-parser')
 const passport = require('passport');
-const Migration = require('./config/migration'); 
+
 
 
 
@@ -15,7 +15,6 @@ const DB = require('./database');
 require('./config/passport');
 
 DB();
-Migration();
 //Configuracion
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname,'views'));
