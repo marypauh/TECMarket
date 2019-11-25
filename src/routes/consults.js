@@ -92,7 +92,6 @@ router.get('/consult2', (req,res)=>{
             var market = result1.records[j]._fields[0].properties;
             markets.push(market);
         }
-        console.log(markets);
        
 
 
@@ -124,7 +123,6 @@ router.post('/consults/consult5', (req,res)=>{
             var product = result1.records[j]._fields[0].properties;
             products.push(product);
         }
-        console.log(products);
        
 
 
