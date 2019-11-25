@@ -17,12 +17,12 @@ router.get('/register',(req, res) => {
 
 router.post('/register/new', async (req, res) => {
   let errors = [];
-  const {name, email, telephone, dateU, type, user, password} = req.body;
+  const {name, email, telephone, dateU, type, username, password} = req.body;
   if(errors.length > 0){
-    res.render('signup', {errors, name, email, telephone, dateU, type, user, password});
+    res.render('signup', {errors, name, email, telephone, dateU, type, username, password});
   } else {
     // Look for username coincidence
-    const nameU = await User.findOne({user: user});
+    const nameU = await User.findOne({username: username});
     if(nameU) {
       console.log("The user already exists");
       res.redirect('/register');
