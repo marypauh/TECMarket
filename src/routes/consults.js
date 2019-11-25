@@ -70,7 +70,7 @@ router.get('/consult3', (req,res)=>{
 
         console.log(purchases3);
         //console.log(purchases2);
-       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult3", {purchases,purchases2, purchases3,purchases4, purchases5 }); 
+       res.render("consults/viewConsult3", {purchases,purchases2, purchases3,purchases4, purchases5 }); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
@@ -96,7 +96,7 @@ router.get('/consult2', (req,res)=>{
        
 
 
-       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult2", {markets}); 
+       res.render("consults/viewConsult2", {markets}); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
@@ -121,7 +121,7 @@ router.get('/consult5', (req,res)=>{
        
 
 
-       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult5", {products}); 
+       res.render("consults/viewConsult5", {products}); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
