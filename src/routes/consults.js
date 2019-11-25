@@ -42,29 +42,20 @@ router.post('/consult1',async(req,res)=>{
 
 
 //Consulta2
-router.post('/consults/consult2', (req,res)=>{
+router.post('consults/consult2', (req,res)=>{
     var errors=[];
     session3
-    .run('MATCH (a:Purchases) return a')
+    .run('MATCH (a)-[:Place_Order]->(b) RETURN b.name, COLLECT(a) as Orders ORDER BY SIZE(Orders) DESC LIMIT 100')
     .then(function(result1){
-        var purchases=result1.records[0]._fields[0].properties
+        var purchases=result1.records[0]._fields[0]
         console.log(purchases);
-        session3
-        .run('MATCH (b:SuperMarket) where b.name="'+result1.records[0]._fields[0].properties.supermarketName+'" return b')
-        .then(function(result2){
-            var consult=result2.records[0]._fields[0].properties 
-            console.log(consult);
-            res.render("consults/showConsult2",{
-                consult
-            })
-        }) 
+        res.render("/consults/viewConsult2"); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
-        res.render("consults/menuConsults",{
-            errors
-        });
-    })    
+        console.log("fallo");
+        res.render("/consults/viewConsult2"); 
+    })
 })
 
 //consulta 3
@@ -73,24 +64,23 @@ router.get('/consults/consult3', async (req,res)=>{
     var errors=[];
 
     session3
-    .run('MATCH (n:Purchases) return max(n.supermarketName)')
+    .run('MATCH (a)-[:Place_Order]->(b) RETURN b.name, COLLECT(a) as Orders ORDER BY SIZE(Orders) DESC LIMIT 5')
     .then(function(result){
         var final =result.records[0]._fields[0]
+        console.log(final);
 
-        res.render("consults/showConsult3",{
-            final
-        });
+        //res.render("consults/showConsult3",{
+            //final
+        //});
         
     })
     .catch(function(err){
-        errors.push({text:"Error"})
-        res.render("consults/menuConsults",{
-            errors
-        });
+        //errors.push({text:"Error"})
+        //res.render("consults/menuConsults",{
+            //errors
+            console.log("fallo");
     })
 })
-
-
 //consutla 4
 router.post('/consults/consult4',async(req,res)=>{
     var idClient=req.body.idClient;
@@ -229,7 +219,10 @@ router.get('/consults', (req,res)=>{
     res.render("consults/menuConsults");
 })
 router.get('/consults/consult1', (req,res)=>{
-    res.render("consults/consult1");
+    res.render("consults/consult");
+})
+router.get('/consults2', (req,res)=>{
+    res.render("consults/consult2");
 })
 router.get('/consults/consult4', (req,res)=>{
     res.render("consults/consult4");
