@@ -1,5 +1,5 @@
 const express= require('express');
-const axios = require('axios');
+
 const router = express.Router();
 const neo4j = require("neo4j-driver").v1;
 const driver = neo4j.driver("bolt://localhost", neo4j.auth.basic("neo4j", "12345"));
@@ -7,54 +7,52 @@ const session3= driver.session();
 
 //Models
 const Market = require("../models/markets");
-const Client = require("../models/clients");
 const Product = require("../models/products");
-const Employee = require("../models/employees");
 
 //consult 1
-router.post('/consult1',async(req,res)=>{
-    var idClient=req.body.idClient;
-    var errors=[];
 
-    if(!idClient){
-        errors.push({text:"You must enter the id of the client"});
-    }else{
+
+
+  router.get('/consult1',async(req,res)=>{
+    var clientUsername = req.body.clientUsername;
+    var client = clientUsername;
 
         session3
-        .run('MATCH (c:Purchases) where c.client="'+idClient+'"return c')
+        .run('MATCH (n:Orders) where n.clientUsername= "'+client+'" RETURN n')
         .then(function(result1){
-            var consulta=result1.records[0]._fields[0].properties
-            console.log(consulta);
-            res.render("consults/showConsult1",{
-                consulta,
-                consultaproductos
-            });
-        })
+            var orderArr = [];
+            result1.records.forEach(function(record){
+                orderArr.push({
+                    id: record._fields[0].identity.low,
+                    name: record._fields[0].properties.name
+
+                });
+            })
+            var oders = orderArr;
+            console.log(oders);
+            //res.render('consults/consult1',{orders:orderArr})
+            })
         .catch(function(err){
-            errors.push({text:"The related client was not found"})
-            res.render("consults/consult4",{
-                errors
-            });
-        })
-
-    }
-})
-
+   console.log(err);
+            })  
+        });
 
 //Consulta2
-router.post('consults/consult2', (req,res)=>{
+
+
+router.get('/consult2', (req,res)=>{
     var errors=[];
     session3
     .run('MATCH (a)-[:Place_Order]->(b) RETURN b.name, COLLECT(a) as Orders ORDER BY SIZE(Orders) DESC LIMIT 100')
     .then(function(result1){
-        var purchases=result1.records[0]._fields[0]
+        var purchases = result1.records[0]._fields[0]
         console.log(purchases);
-        res.render("/consults/viewConsult2"); 
+       // res.render("/consults/viewConsult2"); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
         console.log("fallo");
-        res.render("/consults/viewConsult2"); 
+       // res.render("/consults/viewConsult2"); 
     })
 })
 
@@ -81,6 +79,7 @@ router.get('/consults/consult3', async (req,res)=>{
             console.log("fallo");
     })
 })
+/*
 //consutla 4
 router.post('/consults/consult4',async(req,res)=>{
     var idClient=req.body.idClient;
@@ -215,21 +214,7 @@ router.post('/consults/consult5',async(req,res)=>{
 
 })
 
-router.get('/consults', (req,res)=>{
-    res.render("consults/menuConsults");
-})
-router.get('/consults/consult1', (req,res)=>{
-    res.render("consults/consult");
-})
-router.get('/consults2', (req,res)=>{
-    res.render("consults/consult2");
-})
-router.get('/consults/consult4', (req,res)=>{
-    res.render("consults/consult4");
-})
-router.get('/consults/consult5', (req,res)=>{
-    res.render("consults/consult5");
-})
 
+*/
 
 module.exports = router;

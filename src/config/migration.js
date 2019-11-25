@@ -151,7 +151,7 @@ module.exports = async()=>{
 
 //The relationship between the order and the client is created
         session
-        .run('MATCH (a:Orders {idOrder: {idO}}), (b:Clients {username:{cO}}) MERGE (a) - [r:Made_an_order] -> (b) RETURN a,b', {idO:idOrd, cO:client, marketN:nameMark})
+        .run('MATCH (a:Orders {idOrder: {idO}}), (b:Clients {username:{cO}}) MERGE (a) - [r:Made_an_order] -> (b) set a.clientUsername = {cO}', {idO:idOrd, cO:client, marketN:nameMark})
         .then(function(result){
             session.close();
             console.log("cliente");                

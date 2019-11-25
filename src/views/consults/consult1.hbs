@@ -1,0 +1,59 @@
+<div class="col-md-4 mx-auto">
+  <div class="card text-center">
+    <div class="card-header">
+      <h3>Consult Client Orders</h3>
+    </div>
+    <div class="card-body">
+    
+      <form action="/consult1" method="POST">
+        <div class="form-group">
+          <input type="text" name="clientUsername" class="form-control" placeholder="Username" autofocus/>
+        </div>
+    
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" type="submit">
+            Search
+          </button>
+          <br>
+          
+         <a href="/employeeM">Menu</a>
+        </div>
+      </form>
+    
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-5">
+    <h4>Client's Orders</h4>
+    <div class="card">
+        <div class="card-body">
+            <form method="post" action="/graphQuery1Post">
+                <label>Person Name</label><br>
+                <input type="text" name="person_name">
+                <br>
+                <label>Person LastName</label><br>
+                <input type="text" name="person_lastName">
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+            <h4>Person -> Movie</h4>
+            <form method="post" action="/graphQuery1PostR">
+                <label>Person Name</label><br>
+                <input type="text" name="name">
+                <br>
+                <label>Movie Title</label><br>
+                <input type="text" name="title">
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+
+            <ul>
+                <% persons.forEach(function(person){ %>
+                    <li><%= person.name %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
