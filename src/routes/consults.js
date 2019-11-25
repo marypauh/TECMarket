@@ -105,7 +105,7 @@ router.get('/consult2', (req,res)=>{
     })
 })
 
-router.post('/consult5', (req,res)=>{
+router.get('/consult5', (req,res)=>{
     var errors=[];
     session3
     .run('MATCH (n:Products) RETURN n LIMIT 25')
@@ -117,11 +117,11 @@ router.post('/consult5', (req,res)=>{
             var product = result1.records[j]._fields[0].properties;
             products.push(product);
         }
-        console.log(markets);
+        console.log(products);
        
 
 
-       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult2", {product}); 
+       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult5", {products}); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
