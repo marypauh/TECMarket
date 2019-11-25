@@ -130,12 +130,12 @@ module.exports = async()=>{
         const client = order.clientUsername;
         const nameMark = order.market;
         const productsO = order.products;
+        const quantityO = order.quantityProducts;
        // console.log(idOrd); 
         //console.log(hourO); 
 
       
-        
-
+//The node is created in Neo4j
         session
         .run('CREATE (n:Orders {idOrder: {idO}, total: {tO}, hour: {hO} , state: {sO}, needs: {nO}}) Return n',
         {idO: idOrd, tO:totalO, hO:hourO, sO: stateO, nO: needsO, marketN:nameMark})
@@ -148,6 +148,8 @@ module.exports = async()=>{
             console.log(err);
         })
 
+
+//The relationship between the order and the client is created
         session
         .run('MATCH (a:Orders {idOrder: {idO}}), (b:Clients {username:{cO}}) MERGE (a) - [r:Made_an_order] -> (b) RETURN a,b', {idO:idOrd, cO:client, marketN:nameMark})
         .then(function(result){
@@ -159,6 +161,7 @@ module.exports = async()=>{
             console.log(err);
         })
 
+//The relationship between the order and the market is created
         session
         .run('MATCH (a:Orders {idOrder: {idO}}), (b:Markets {name:{marketN}}) MERGE (a) - [r:Place_Order] -> (b) RETURN a,b', {idO:idOrd, marketN:nameMark})
         .then(function(result){
@@ -170,12 +173,11 @@ module.exports = async()=>{
             console.log(err);
         })
   
-        //const prO = await orderMongo.find()     
-        //for(var j = 0; j < orderMongo.products.length; j++){
-            //console.log(prO);
-
+//The relationship between the order and the products is created     
+        for(var j = 0; j < productsO.length; j++){
+            const prO = productsO[j];
         session
-        .run(' MATCH (a: Orders {idOrder: {idO}}) , (b:Products {name: {products}}) MERGE (a) -[r:In]->(b) RETURN a,b', {idO:idOrd, products:productsO})
+        .run(' MATCH (a: Orders {idOrder: {idO}}) , (b:Products {idProduct: {prO}}) MERGE (a) -[r:In]->(b) set a.quantityProducts = 5', {idO:idOrd, prO:productsO[j]})
         .then(function(result){
             session.close();
             console.log("productos");                
@@ -185,6 +187,7 @@ module.exports = async()=>{
             console.log(err);
         })
  
-    //}
+  }
+
     };
 }
