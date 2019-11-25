@@ -38,8 +38,8 @@ router.post('/orders/new',async (req, res) => {
   
   idOrderGlobal = idOrd
   const products = await Products.find();
-  //await newOrder.save();
-  res.render('orders/addProducts', {products});
+  await newOrder.save();
+  res.render('orders/addProducts',{products});
 });
 
 
@@ -89,43 +89,29 @@ router.delete('/order/delete/:id', async (req,res) =>{
 
 router.get('/orders/selectMarket', async (req, res) => {
   const markets = await Markets.find();
-  console.log(markets);
   res.render('orders/selectM', {markets});
 });
 
 router.get('/orderDetail/:id',async (req, res) => {
-  //console.log(req.param.id);
   const market = await Markets.findById(req.params.id);
  res.render('orders/orderDetail',{market});
 });
 
-router.get('/orders/addP',async (req, res) => {
-  //const order = await Order.findById(req.params.id);
-  console.log(idOrderGlobal);
-  //const {idOrd} = req.body;
-  //const IdProduct = 123;
-  //const quantity = 2;
+router.post('/orders/addP/:id',async (req, res) => {
 
-  //const newOrder = await Order.findOne({idOrder : idOrd});
-  //const product = await Products.findOne({idProduct: IdProduct});
-  //console.log(newOrder); 
-  //console.log(idOrd);
-  //console.log(product);
-  //console.log(newOrder);
-  //newOrder.products.push(IdProduct);
-  //newOrder.quantityProducts.push(quantity);
-  //const priceP = product.price;
-  //const totalP = newOrder.total;
-  //const totalOrder = totalP + (priceP * quantity);
-  //newOrder.total = totalOrder;
-  //product.quantity = product.quantity - quantity;
+  const newOrder = await Order.findOne({idOrder : idOrderGlobal});
+  const product = await Products.findById(req.params.id);
+  newOrder.products.push(product.idProduct);
+  newOrder.quantityProducts.push(5);
+  const priceP = product.price;
+  const totalP = newOrder.total;
+  const totalOrder = totalP + (priceP * 5);
+  newOrder.total = totalOrder;
+  product.quantity = product.quantity - 5;
 
-  //console.log(product);
-  //console.log(newOrder);
 
-  //await Order.save();
-  //await Product.save();
- //res.render('orders/addProducts',{newOrder});
+  await newOrder.save();
+  await product.save();
 });
 
 router.post('/clients/orders' , async (req, res) => {

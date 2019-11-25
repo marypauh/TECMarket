@@ -6,7 +6,6 @@
                 <h3 class="card-title d-flex justify-content-between align-items-center">
                    <b> Product </b>
                 </h3>
-                <p>Id Orden: {{newOrder.state}} </p>
                 <p>Id Product: {{idProduct}}</p>
                 <p>Name: {{name}}</p>
                 <p>Description: {{description}}</p> 
@@ -15,8 +14,8 @@
                      <input type="Number" name="quant" class="form-control" placeholder="Quantity" autofocus/>
                 </div>
  
-                <form action="/orders/addP" method="POST">
-                    <input type="hidden" name="_method" value = "DELETE">
+                <form action="/orders/addP/{{_id}}/" method="POST">
+                    <input type="hidden" name="_method">
                         <button type="submit" class="btn btn-danger btn-block btn-sm">
                             Purchase 
                         </button>
