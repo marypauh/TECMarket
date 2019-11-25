@@ -11,31 +11,31 @@ const Product = require("../models/products");
 
 //consult 1
 
+router.get('/consult1', (req,res)=>{
+    res.render("consults/get1");
+})
 
+router.post('/consults/consult1',async(req,res)=>{
+    var clientUsername=req.body.clientUsername;
+    var errors=[];
 
-  router.get('/consult1',async(req,res)=>{
-    var clientUsername = req.body.clientUsername;
-    var client = clientUsername;
-
+    if(clientUsername){
         session3
-        .run('MATCH (n:Orders) where n.clientUsername= "'+client+'" RETURN n')
+        .run('MATCH (n:Orders) where n.clientUsername= "'+clientUsername+'" RETURN n')
         .then(function(result1){
-            var orderArr = [];
-            result1.records.forEach(function(record){
-                orderArr.push({
-                    id: record._fields[0].identity.low,
-                    name: record._fields[0].properties.name
+            var order1=result1.records[0]._fields[0].properties
+            var order2=result1.records[1]._fields[0].properties
+            var order3=result1.records[2]._fields[0].properties
 
-                });
-            })
-            var oders = orderArr;
-            console.log(oders);
-            //res.render('consults/consult1',{orders:orderArr})
-            })
+            res.render("consults/consult1",{order1,order2,order3
+            });
+        })
         .catch(function(err){
-   console.log(err);
-            })  
-        });
+          console.log(err);
+            })
+
+    }
+})
 
 //Consulta2
 
@@ -79,47 +79,54 @@ router.get('/consults/consult3', async (req,res)=>{
             console.log("fallo");
     })
 })
-/*
+
 //consutla 4
+
+router.get('/consult4', (req,res)=>{
+    res.render("consults/get4");
+})
+
 router.post('/consults/consult4',async(req,res)=>{
-    var idClient=req.body.idClient;
+    var clientUsername=req.body.clientUsername;
     var success=[];
     var errors=[];
 
-    if(!idClient){
-        errors.push({text:"You must enter the id of the client"});
-    }else{
+    if(clientUsername){
+
         session3//saca el cliente
-        .run('MATCH (c:Client) where c.idClient="'+idClient+'" return c')
+        .run('MATCH (n:Clients) where n.username= "'+clientUsername+'" RETURN n')
         .then(function(result1){
-            console.log(result1.records[0]._fields[0].properties.idClient)
+            console.log(result1.records[0]._fields[0].properties.clientUsername)
 
             session3//saca el supermercado
-            .run('MATCH (p:Purchases) where p.client="'+result1.records[0]._fields[0].properties.idClient+'" return p')
+            .run('MATCH (n:Orders) where n.clientUsername="'+result1.records[0]._fields[0].properties.clientUsername+'" return n')
             .then(function(result2){
-                console.log(result2.records[0]._fields[0].properties.supermarketName);
+                console.log(result2.records[0]._fields[0].properties.market);
 
                 session3//saca el pedido en la misma sucursal
-                .run('MATCH (p:Purchases) where not p.client="'+result2.records[0]._fields[0].properties.idClient+'" and p.supermarketName="'+result2.records[0]._fields[0].properties.supermarketName+'"  return p')
+                .run('MATCH (n:Orders) where not n.clientUsername="'+result2.records[0]._fields[0].properties.clientUsername+'" and n.market="'+result2.records[0]._fields[0].properties.market+'"  return n')
                 .then(function(result3){
 
                     session3//saca toda la información del cliente encontrado
-                    .run('MATCH (p:Client) where p.idClient="'+result3.records[0]._fields[0].properties.client+'" return p')
+                    .run('MATCH (n:Clients) where n.clientUsername="'+result3.records[0]._fields[0].properties.clientUsername+'" return n')
                     .then(function(result4){
 
-                        var clienteSimilar =result4.records[0]._fields[0].properties;
-                        var supermarket=result2.records[0]._fields[0].properties.supermarketName;
-                        console.log(clienteSimilar)
+                        var client1 =result4.records[0]._fields[0].properties;
+                        var market1=result2.records[0]._fields[0].properties.market;
+                        var client2 =result4.records[1]._fields[0].properties;
+                        var market2=result2.records[1]._fields[0].properties.market;
+                        var client3 =result4.records[2]._fields[0].properties;
+                        var market3=result2.records[2]._fields[0].properties.market;
 
-                        res.render("consults/showConsult",{
-                            clienteSimilar,
-                            supermarket
+                        res.render("consults/consult4",{
+                            client1, client2, client3,
+                            market1, market2, market3
                         });
 
                     })
                     .catch(function(err){
                         errors.push({text:"The related client was not found"})
-                        res.render("consults/consult4",{
+                        res.render("consults/get4",{
                             errors
                         });
                     })
@@ -127,7 +134,7 @@ router.post('/consults/consult4',async(req,res)=>{
                 })
                 .catch(function(err){
                     errors.push({text:"There are not more purchases in that supermarket"})
-                    res.render("consults/consult4",{
+                    res.render("consults/get4",{
                         errors
                     });
                 })
@@ -135,7 +142,7 @@ router.post('/consults/consult4',async(req,res)=>{
             })
             .catch(function(err){
                 errors.push({text:"That client does not have purchases"})
-                res.render("consults/consult4",{
+                res.render("consults/get4",{
                     errors
                 });
             })
@@ -149,72 +156,5 @@ router.post('/consults/consult4',async(req,res)=>{
         })
     }
 })
-
-//consulta 5
-router.post('/consults/consult5',async(req,res)=>{
-    var idClient=req.body.idClient;
-    var success=[];
-    var errors=[];
-    var arrayFinaLProductos=[];
-
-    if(!idClient){
-        errors.push({text:"You must enter the id of the client"});
-    }else{
-        session3
-        .run('MATCH (c:Client),(p:Purchases) where not c.idClient="'+idClient+'" and c.idClient=p.client return c')
-        .then(function(result1){ 
-            console.log(result1.records[0]._fields[0].properties)
-
-            session3
-            .run('MATCH (p:Purchases) where p.client="'+result1.records[0]._fields[0].properties.idClient+'" return p')
-            .then(function(result2){ 
-                var ids= String(result2.records[0]._fields[0].properties.products).split(",")
-                
-                console.log(ids)
-
-                var contadorPorductos=1;
-                while(ids.length>contadorPorductos){
-                    
-
-                    session3
-                    .run('MATCH (p:Product) where p.idProduct="'+ids[contadorPorductos]+'" return p')
-                    .then(function(result){
-                        var x =result.records[0]._fields[0].properties.name
-                        console.log(x)
-                        res.render("consults/showConsult5",{
-                            x
-                        });
-                        
-                    })
-                    .catch(function(err){
-                        errors.push({text:"There are not products"})
-                        res.render("consults/consult5",{
-                            errors
-                        });
-                    })
-                    contadorPorductos+=1
-                }
-                console.log(arrayFinaLProductos)
-            })
-            .catch(function(err){
-                errors.push({text:"The rest of the clients do not have purchases"})
-                res.render("consults/consult5",{
-                    errors
-                });
-            })
-        })
-        .catch(function(err){
-            errors.push({text:"There are not more clients"})
-            res.render("consults/consult5",{
-                errors
-            });
-        })
-
-    } 
-
-})
-
-
-*/
 
 module.exports = router;

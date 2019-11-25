@@ -1,0 +1,26 @@
+<br><br>
+<h4></h4>
+<br><br>
+<div class="row">
+    <br><br>
+    {{#if market1}}
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title d-flex justify-content-between align-items-center">
+                  Another client who purchased in the Supermarket {{market1}} was
+                </h2>
+                <br><br>
+                {{#if client1}}
+                <p>Name: {{client1.name}}</p>
+                <p>Phone: {{client1.telephone}}</p>
+                <p>Email: {{client1.email}}</p>
+                <p>Birthdate: {{client1.dateU}}</p>
+                {{/if}}
+                
+                <br><br>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+<br><br><br>

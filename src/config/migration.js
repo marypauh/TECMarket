@@ -163,7 +163,7 @@ module.exports = async()=>{
 
 //The relationship between the order and the market is created
         session
-        .run('MATCH (a:Orders {idOrder: {idO}}), (b:Markets {name:{marketN}}) MERGE (a) - [r:Place_Order] -> (b) RETURN a,b', {idO:idOrd, marketN:nameMark})
+        .run('MATCH (a:Orders {idOrder: {idO}}), (b:Markets {name:{marketN}}) MERGE (a) - [r:Place_Order] -> (b) set a.market = {marketN}', {idO:idOrd, marketN:nameMark})
         .then(function(result){
             session.close();
             console.log("market");                

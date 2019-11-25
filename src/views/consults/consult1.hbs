@@ -1,59 +1,72 @@
-<div class="col-md-4 mx-auto">
-  <div class="card text-center">
-    <div class="card-header">
-      <h3>Consult Client Orders</h3>
-    </div>
-    <div class="card-body">
-    
-      <form action="/consult1" method="POST">
-        <div class="form-group">
-          <input type="text" name="clientUsername" class="form-control" placeholder="Username" autofocus/>
+<br><br>
+<h4>Clients Orders</h4>
+<br><br>
+<div class="row">
+    <br><br>
+    {{#if order1}}
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title d-flex justify-content-between align-items-center">
+                  Client:{{order1.clientUsername}}
+                </h3>
+                <p>Id Order: {{order1.idOrder}}</p>
+                <p>State: {{order1.state}}</p>
+                <p>Products: {{order1.products}}</p>
+                <p>Total: {{order1.total}}</p>
+                <p>Needs: {{order1.needs}}</p>
+                <br><br>
+            </div>
         </div>
-    
-        <div class="form-group">
-          <button class="btn btn-primary btn-block" type="submit">
-            Search
-          </button>
-          <br>
-          
-         <a href="/employeeM">Menu</a>
-        </div>
-      </form>
-    
     </div>
-  </div>
+    {{/if}}
 </div>
-
-
-<div class="col-md-5">
-    <h4>Client's Orders</h4>
+<br><br><br>
+<br><br>
+<h4>Clients Orders</h4>
+<br><br>
+<div class="row">
+    <br><br>
+    {{#if order2}}
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title d-flex justify-content-between align-items-center">
+                  Client:{{order2.clientUsername}}
+                </h5>
+                 <p>Id Order: {{order2.idOrder}}</p>
+                <p>State: {{order2.state}}</p>
+                <p>Products: {{order2.products}}</p>
+                <p>Total: {{order2.total}}</p>
+                <p>Needs: {{order2.needs}}</p>
+                <br><br>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>
+<br><br><br>
+<br><br>
+<h4>Clients Orders</h4>
+<br><br>
+<div class="row">
+    <br><br>
+    {{#if order3}}
+    <div class="col-md-3">
     <div class="card">
-        <div class="card-body">
-            <form method="post" action="/graphQuery1Post">
-                <label>Person Name</label><br>
-                <input type="text" name="person_name">
-                <br>
-                <label>Person LastName</label><br>
-                <input type="text" name="person_lastName">
+            <div class="card-body">
+                <h3 class="card-title d-flex justify-content-between align-items-center">
+                  Client:{{order3.clientUsername}}
+                </h5>
+                 <p>Id Order: {{order3.idOrder}}</p>
+                <p>State: {{order3.state}}</p>
+                <p>Products: {{order3.products}}</p>
+                <p>Total: {{order3.total}}</p>
+                <p>Needs: {{order3.needs}}</p>
                 <br><br>
-                <input type="submit" value="Submit">
-            </form>
-            <h4>Person -> Movie</h4>
-            <form method="post" action="/graphQuery1PostR">
-                <label>Person Name</label><br>
-                <input type="text" name="name">
-                <br>
-                <label>Movie Title</label><br>
-                <input type="text" name="title">
-                <br><br>
-                <input type="submit" value="Submit">
-            </form>
-
-            <ul>
-                <% persons.forEach(function(person){ %>
-                    <li><%= person.name %></li>
-                <% }) %>
-            </ul>
+            </div>
         </div>
     </div>
+    {{/if}}
 </div>
+<br><br><br>
