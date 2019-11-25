@@ -6,13 +6,21 @@ var session = driver.session();
 //const Migration = require('../config/migration');
 
 //General variables
-const Users = require('../models/users');
-const Place = require('../models/Places');
-const Delivery = require('../models/Delivery');
-const Product = require('../models/Products');
+const Market = require('../models/markets');
+const Order = require('../models/orders');
+const Product = require('../models/products');
 
 //Controller for Clients Migration View
 exports.adminClientsMigration = (req, res) =>{
     //Migration();
     res.render('/migrationClientsView')
 }
+
+
+//Controller for grahp query 1: Search for a particular client and show all their order history.
+
+//exports.clientGraphQuery1 = (req.res) => {
+   // session
+    //.run('MATCH (n:)')
+
+//}
