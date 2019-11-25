@@ -9,7 +9,7 @@ const usersSchema = new Schema({
   telephone : { type: Number, required: true},
   dateU: {type: Date, required: true},
   type: {type: Number, required: true},
-  username: {type: String, required:true},
+  user: {type: String, required:true},
   password: { type: String, required: true }
 });
 

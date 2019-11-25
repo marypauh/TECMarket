@@ -17,7 +17,7 @@ router.get('/register',(req, res) => {
 
 router.post('/register/new', async (req, res) => {
   let errors = [];
-  const {  name, email, telephone, dateU, type, user, password} = req.body;
+  const {name, email, telephone, dateU, type, user, password} = req.body;
   if(errors.length > 0){
     res.render('signup', {errors, name, email, telephone, dateU, type, user, password});
   } else {
