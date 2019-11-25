@@ -70,7 +70,7 @@ router.get('/consult3', (req,res)=>{
 
         console.log(purchases3);
         //console.log(purchases2);
-       res.render("consults/viewConsult3", {purchases,purchases2, purchases3,purchases4, purchases5 }); 
+       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult3", {purchases,purchases2, purchases3,purchases4, purchases5 }); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
@@ -96,7 +96,7 @@ router.get('/consult2', (req,res)=>{
        
 
 
-       res.render("consults/viewConsult2", {markets}); 
+       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult2", {markets}); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
@@ -121,7 +121,7 @@ router.post('/consult5', (req,res)=>{
        
 
 
-       res.render("consults/viewConsult2", {product}); 
+       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult2", {product}); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
@@ -147,8 +147,7 @@ router.post('/consults/consult4',async(req,res)=>{
         session3//saca el cliente
         .run('MATCH (n:Clients) where n.username= "'+clientUsername+'" RETURN n')
         .then(function(result1){
-            var clientN =result1.records[0]._fields[0].properties.clientUsername
-            console.log(clientN);
+            console.log(result1.records[0]._fields[0].properties.clientUsername)
 
             session3//saca el supermercado
             .run('MATCH (n:Orders) where n.clientUsername="'+result1.records[0]._fields[0].properties.clientUsername+'" return n')
