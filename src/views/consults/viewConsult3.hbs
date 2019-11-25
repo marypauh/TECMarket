@@ -1,23 +1,23 @@
 <div class="row">
-    {{#each markets}}
     <div class="col-md-3">
-        <b> Supermarkets  </b>
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title d-flex justify-content-between align-items-center">
+                     <b> Top 5 supermarkets  </b>
                 </h3>
-                <p>Name: {{name}}</p>
-                <p>Description: {{description}}</p>
-                <p>Latitude: {{latitude}}</p>
-                <p>Length: {{length}}</p>
-                <p>Direction: {{dirrection}}</p> 
+                <p>#1 Supermarket: {{purchases}}</p>
+                <p>#2 Supermarket: {{purchases2}} </p>
+                <p>#3 Supermarket:{{purchases3}} </p> 
+                <p>#4 Supermarket:{{purchases4}} </p> 
+                <p>#5 Supermarket:{{purchases5}} </p> 
             </form>
                 <form action="/employeeM" class="inline">
                 <button type= "submit" class="btn btn-dark"> Go Back</button>
                 </form>
                 </form> 
+                </form> 
             </div>
         </div>
     </div>
-    {{/each}}
+
 </div>

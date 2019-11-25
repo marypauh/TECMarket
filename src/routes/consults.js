@@ -37,48 +37,99 @@ router.post('/consults/consult1',async(req,res)=>{
     }
 })
 
-//Consulta2
+//Consult 3
 
-
-router.get('/consult2', (req,res)=>{
+router.get('/consult3', (req,res)=>{
     var errors=[];
     session3
-    .run('MATCH (a)-[:Place_Order]->(b) RETURN b.name, COLLECT(a) as Orders ORDER BY SIZE(Orders) DESC LIMIT 100')
+    .run('MATCH (a)-[:Place_Order]->(b) RETURN b.name, COLLECT(a) as Orders ORDER BY SIZE(Orders) DESC LIMIT 5')
     .then(function(result1){
-        var purchases = result1.records[0]._fields[0]
-        console.log(purchases);
-       // res.render("/consults/viewConsult2"); 
+        var purchases = "none";
+        var purchases2 = "none";
+        var purchases3 = "none";
+        var purchases4 = "none";
+        var purchases5 = "none";
+
+
+        if (result1.records[0] != undefined){
+            purchases = result1.records[0]._fields[0];
+        }
+        if (result1.records[1] != undefined){
+            purchases2 = result1.records[1]._fields[0]; 
+       }
+       if (result1.records[2] != undefined){
+            purchases3 = result1.records[2]._fields[0];
+        }
+        if (result1.records[3] != undefined){
+            purchases4 = result1.records[3]._fields[0];
+        }
+        if (result1.records[4] != undefined){
+            purchases4 = result1.records[4]._fields[0];
+        }
+        
+
+        console.log(purchases3);
+        //console.log(purchases2);
+       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult3", {purchases,purchases2, purchases3,purchases4, purchases5 }); 
     })
     .catch(function(err){
         errors.push({text:"There aren't purchases in the database"})
-        console.log("fallo");
+        console.log(err);
        // res.render("/consults/viewConsult2"); 
     })
 })
 
-//consulta 3
-router.get('/consults/consult3', async (req,res)=>{
-    
+//consult 2
+router.get('/consult2', (req,res)=>{
     var errors=[];
-
     session3
-    .run('MATCH (a)-[:Place_Order]->(b) RETURN b.name, COLLECT(a) as Orders ORDER BY SIZE(Orders) DESC LIMIT 5')
-    .then(function(result){
-        var final =result.records[0]._fields[0]
-        console.log(final);
+    .run('MATCH (a)-[:Place_Order]->(b) RETURN b, COLLECT(a) as Orders ORDER BY SIZE(Orders) DESC')
+    .then(function(result1){
+        var markets = [];
 
-        //res.render("consults/showConsult3",{
-            //final
-        //});
-        
+        console.log(result1.records.length);
+        for(var j = 0; j < result1.records.length; j++){
+            var market = result1.records[j]._fields[0].properties;
+            markets.push(market);
+        }
+        console.log(markets);
+       
+
+
+       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult2", {markets}); 
     })
     .catch(function(err){
-        //errors.push({text:"Error"})
-        //res.render("consults/menuConsults",{
-            //errors
-            console.log("fallo");
+        errors.push({text:"There aren't purchases in the database"})
+        console.log(err);
+       // res.render("/consults/viewConsult2"); 
     })
 })
+
+router.post('/consult5', (req,res)=>{
+    var errors=[];
+    session3
+    .run('MATCH (n:Products) RETURN n LIMIT 25')
+    .then(function(result1){
+        var products = [];
+
+        console.log(result1.records.length);
+        for(var j = 0; j < result1.records.length; j++){
+            var product = result1.records[j]._fields[0].properties;
+            products.push(product);
+        }
+        console.log(markets);
+       
+
+
+       res.render("/Users/raquelrojas/Desktop/GitHub/TECMarket/src/views/consults/viewConsult2", {product}); 
+    })
+    .catch(function(err){
+        errors.push({text:"There aren't purchases in the database"})
+        console.log(err);
+       // res.render("/consults/viewConsult2"); 
+    })
+})
+
 
 //consutla 4
 

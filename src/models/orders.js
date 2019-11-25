@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {Schema } = mongoose;
 
 const ordersSchema = new Schema({
-    idOrder: {type: Number, required: true },
+    idOrder: {type: Number, required: true , unique: true},
     market: {type: String , required:true},
     clientUsername: {type: String , required: true},
     products: {type: Array , required: false, default: []},
